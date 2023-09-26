@@ -14,9 +14,11 @@ export default function Home(props: IProps) {
     <main className="home-container">
       <SearchInput />
       <RegionFilter />
+      <div className="cards-wrapper">
       {
         countries?.map((country, i) => <Card country={country} key={i} />)
       }
+      </div>
     </main>
   )
 }
