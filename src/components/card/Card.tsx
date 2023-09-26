@@ -8,8 +8,8 @@ export default function Card(props: IProps) {
   const { country } = props;
 
   return (
-    <>
-      <img src={ country?.flags.png } alt={ country?.flags.alt } />
+    <div className="card-container">
+      <img className="country-flag" src={ country?.flags.png } alt={ country?.flags.alt } />
       <h2 className="country-title">{ country?.name.common } </h2>
       <dl className="card-details-list">
         <div className="card-details-wrapper">
@@ -25,6 +25,6 @@ export default function Card(props: IProps) {
           <dd>{ country?.capital }</dd>
         </div>
       </dl>
-    </>
+    </div>
   )
 }
