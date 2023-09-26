@@ -1,4 +1,5 @@
-import { ICountry } from "../../../ICountry"
+import "./Card.css";
+import { ICountry } from "../../../ICountry";
 
 interface IProps {
   country: null | ICountry
@@ -8,12 +9,22 @@ export default function Card(props: IProps) {
 
   return (
     <>
-      <img />
-      <h2 className="country-title">{country?.name.common}</h2>
-      <ul className="card-stats-list">
-        <ul>Population</ul>
-        <ul>Region</ul>
-      </ul>
+      <img src={ country?.flags.png } alt={ country?.flags.alt } />
+      <h2 className="country-title">{ country?.name.common } </h2>
+      <dl className="card-details-list">
+        <div className="card-details-wrapper">
+          <dt>Population</dt>
+          <dd>{ country?.population.toLocaleString() }</dd>
+        </div>
+        <div className="card-details-wrapper">
+          <dt>Region</dt>
+          <dd>{ country?.region }</dd>
+        </div>
+        <div className="card-details-wrapper">
+          <dt>Capital</dt>
+          <dd>{ country?.capital }</dd>
+        </div>
+      </dl>
     </>
   )
 }
