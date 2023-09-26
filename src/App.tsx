@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { ICountry } from "../ICountry";
 import fetchAllCountries from "./api/countries";
 import Header from "./components/header/Header";
 import Home from "./pages/home/Home";
 
 function App() {
-  const countries = useRef(null);
+  const countries = useRef<null | ICountry[]>(null);
   const [dataLoaded, setDataLoaded] = useState(false);
   
   useEffect(() => {
@@ -36,7 +37,7 @@ function App() {
       <Header />
       {
         dataLoaded 
-        ? <Home countries={countries} />
+        ? <Home countries={ countries.current } />
         :
         null
       }
