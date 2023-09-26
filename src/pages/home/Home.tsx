@@ -7,17 +7,16 @@ import Card from "../../components/card/Card";
 interface IProps {
   countries: null | ICountry[]
 }
-
 export default function Home(props: IProps) {
   const { countries } = props;
 
   return (
-    <div className="home-container">
+    <main className="home-container">
       <SearchInput />
       <RegionFilter />
       {
         countries?.map((country, i) => <Card country={country} key={i} />)
       }
-    </div>
+    </main>
   )
 }
