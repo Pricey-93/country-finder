@@ -5,10 +5,8 @@
   gap: 1rem;
 }
 .cards-wrapper {
-  padding-left: 2rem;
-  padding-right: 2rem;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4rem;
 }
