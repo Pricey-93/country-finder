@@ -1,0 +1,12 @@
+.header-container {
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--standard-white);
+  box-shadow: var(--light-mode-box-shadow);
+}
+
+.header-title {
+  font-size: var(--home-page-body-text-size);
+}

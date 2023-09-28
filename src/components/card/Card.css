@@ -1,0 +1,31 @@
+.card-container {
+  overflow: hidden;
+  max-width: 300px;
+  border: 0;
+  border-radius: 5px;
+  background-color: var(--standard-white);
+  box-shadow: var(--light-mode-box-shadow);
+}
+.country-flag {
+  /* max-width: 100%; */
+  width: 300px;
+  height: 199px;
+}
+.country-title {
+  padding: 1rem 1.5rem 1rem 1.5rem;
+}
+dl {
+  padding: 0 0 2.5rem 1.5rem;
+}
+dt {
+  font-weight: 600;
+}
+dd {
+  display: inline;
+}
+dt::after {
+  content: ": ";
+}
+dt, dd {
+  display: inline;
+}
