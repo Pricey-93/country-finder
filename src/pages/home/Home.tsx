@@ -12,7 +12,7 @@ export default function Home(props: IProps) {
   const { countries } = props;
   const [filteredCountries, setFilteredCountries] = useState(countries);
   
-  function filterCountries(region: string) {
+  function filterCountries(region: string):void {
     if (region === "Filter by Region") {
       setFilteredCountries(countries);
     }
@@ -22,10 +22,17 @@ export default function Home(props: IProps) {
     }
   }
 
+  function searchCountries(name: string):void {
+    const searchResult = countries?.filter(country => country.name.common.toUpperCase() === name.toUpperCase());
+    if (searchResult?.length > 0) {
+      setFilteredCountries(searchResult);
+    }
+  }
+
   return (
     <main className="home-container">
       <div className="controls-wrapper">
-        <SearchInput />
+        <SearchInput searchCountries={ searchCountries }/>
         <RegionFilter filterCountries={ filterCountries }/>
       </div>
       <div className="cards-wrapper">

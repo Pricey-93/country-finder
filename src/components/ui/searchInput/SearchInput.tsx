@@ -1,11 +1,25 @@
-import "./SearchInput.css"
+import "./SearchInput.css";
 
-export default function SearchInput() {
+interface IProps {
+  searchCountries: (name: string) => void 
+}
+export default function SearchInput(props: IProps) {
+  const { searchCountries } = props;
 
   return (
     <input type="search"
     name="country-search" 
     className="country-search-input"
-    placeholder="Search for a country..." />
+    placeholder="Search for a country..."
+    onKeyDown=
+    {
+      (event) => 
+      {
+        if (event.key === "Enter") {
+          searchCountries(event.target.value);
+        }
+      } 
+    } 
+    />
   )
 } 
