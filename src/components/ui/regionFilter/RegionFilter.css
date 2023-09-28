@@ -1,6 +1,6 @@
 .region-filter {
   padding: 1rem;
-  max-width: 50%;
+  width: 220px;
   border: 0;
   border-radius: 5px;
   background-color: var(--standard-white);
