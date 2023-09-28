@@ -1,4 +1,5 @@
 import "./Home.css";
+import { useState } from "react";
 import { ICountry } from "../../../ICountry";
 import SearchInput from "../../components/ui/searchInput/SearchInput";
 import RegionFilter from "../../components/ui/regionFilter/RegionFilter";
@@ -9,16 +10,27 @@ interface IProps {
 }
 export default function Home(props: IProps) {
   const { countries } = props;
+  const [filteredCountries, setFilteredCountries] = useState(countries);
+  
+  function filterCountries(region: string) {
+    if (region === "Filter by Region") {
+      setFilteredCountries(countries);
+    }
+    else {
+      const filtered = countries.filter(country => country.region === region);
+    setFilteredCountries(filtered);
+    }
+  }
 
   return (
     <main className="home-container">
       <div className="controls-wrapper">
         <SearchInput />
-        <RegionFilter />
+        <RegionFilter filterCountries={ filterCountries }/>
       </div>
       <div className="cards-wrapper">
       {
-        countries?.map((country, i) => <Card country={country} key={i} />)
+        filteredCountries?.map((country, i) => <Card country={country} key={i} />)
       }
       </div>
     </main>
