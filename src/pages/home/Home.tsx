@@ -12,8 +12,10 @@ export default function Home(props: IProps) {
 
   return (
     <main className="home-container">
-      <SearchInput />
-      <RegionFilter />
+      <div className="controls-wrapper">
+        <SearchInput />
+        <RegionFilter />
+      </div>
       <div className="cards-wrapper">
       {
         countries?.map((country, i) => <Card country={country} key={i} />)
