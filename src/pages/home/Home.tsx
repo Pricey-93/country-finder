@@ -6,7 +6,7 @@ import RegionFilter from "../../components/ui/regionFilter/RegionFilter";
 import Card from "../../components/card/Card";
 
 interface IProps {
-  countries: null | ICountry[]
+  countries: ICountry[]
 }
 export default function Home(props: IProps) {
   const { countries } = props;
@@ -21,7 +21,7 @@ export default function Home(props: IProps) {
     setFilteredCountries(filtered);
     }
   }
-
+ 
   function searchCountries(name: string):void {
     const searchResult = countries?.filter(country => country.name.common.toUpperCase() === name.toUpperCase());
     if (searchResult?.length > 0) {

@@ -1,43 +1,40 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ICountry } from "../ICountry";
 import fetchAllCountries from "./api/countries";
 import Header from "./components/header/Header";
 import Home from "./pages/home/Home";
 
 function App() {
-  const countries = useRef<null | ICountry[]>(null);
-  const [dataLoaded, setDataLoaded] = useState(false);
+  const [countries, setCountries] = useState<ICountry[]>();
   
   useEffect(() => {
     (async() => {
       const stored = localStorage.getItem("countries");
       if (stored) {
-        countries.current = JSON.parse(stored);
-        setDataLoaded(true);
+        setCountries(JSON.parse(stored));
       }
       else {
         const countryData = await fetchAllCountries();
         if (countryData) {
           localStorage.setItem("countries", JSON.stringify(countryData));
-          countries.current = countryData;
-          setDataLoaded(true);
+          setCountries(countryData);
         }
       }
     })();
   }, [])
 
   useEffect(() => {
-    if (dataLoaded) {
-      console.log(countries.current);
+    if (countries) {
+      console.log(countries);
     }
-  }, [dataLoaded])
+  }, [countries])
 
   return (
     <>
       <Header />
       {
-        dataLoaded 
-        ? <Home countries={ countries.current } />
+        countries 
+        ? <Home countries={ countries } />
         :
         null
       }
