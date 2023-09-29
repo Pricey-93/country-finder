@@ -2,13 +2,14 @@ import "./Card.css";
 import { ICountry } from "../../../ICountry";
 
 interface IProps {
-  country: null | ICountry
+  country: ICountry,
+  activeCountryHandler: (country: ICountry) => void
 }
 export default function Card(props: IProps) {
-  const { country } = props;
+  const { country, activeCountryHandler } = props;
 
   return (
-    <div className="card-container">
+    <div className="card-container" onClick={() => activeCountryHandler(country)}>
       <img className="country-flag" src={ country?.flags.png } alt={ country?.flags.alt } />
       <h2 className="country-title">{ country?.name.common } </h2>
       <dl className="card-details-list">
