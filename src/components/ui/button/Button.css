@@ -1,0 +1,7 @@
+button {
+  padding: 0rem 1rem 0rem;
+  border: 0;
+  background-color: var(--standard-white);
+  box-shadow: var(--light-mode-box-shadow);
+  cursor: pointer;
+}

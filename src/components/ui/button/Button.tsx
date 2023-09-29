@@ -1,11 +1,13 @@
+import "./Button.css";
 
 interface Iprops {
-  callbackHandler: () => void
+  callbackHandler: () => void,
+  value: string
 }
 export default function Button(props: Iprops) {
-  const { callbackHandler } = props;
+  const { callbackHandler, value } = props;
 
   return (
-    <button onClick={() => callbackHandler()}>back</button>
+    <button onClick={() => callbackHandler()}>{ value }</button>
   )
 }
