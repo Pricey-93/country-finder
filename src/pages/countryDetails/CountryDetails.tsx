@@ -23,14 +23,15 @@ export default function CountryDetails(props: IProps) {
     if (activeCountry.name.nativeName) {
       commonNativeName.current = activeCountry.name.nativeName[nameKeys[0]].common;
     }
-    const currenciesArray = Object.values(activeCountry.currencies);
+    const currenciesArray = activeCountry.currencies ? Object.values(activeCountry.currencies) : [];
     const currencies = [];
     for (const currency of currenciesArray) {
       currencies.push(Object.values(currency)[0]);
     }
+    
     setCurrencies(currencies.join(", "));
     
-    const languagesArray = Object.values(activeCountry.languages);
+    const languagesArray = activeCountry.languages ? Object.values(activeCountry.languages) : [];
     setLanguages(languagesArray.join(", "));
     
     console.log(activeCountry)
