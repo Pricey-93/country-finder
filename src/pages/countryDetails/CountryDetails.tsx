@@ -1,16 +1,17 @@
 import "./CountryDetails.css";
 import { useEffect, useRef, useState } from "react";
 import { ICountry } from "../../../ICountry";
-import Button from "../../components/ui/button/Button";
-
+import BackButton from "../../components/ui/backButton/BackButton";
+import Button from "../../components/ui/button/BorderButton";
 
 interface IProps {
   activeCountry: ICountry,
-  activeCountryHandler: (country: ICountry) => void,
-  removeCountryHandler: () => void
+  activeBorderCountries: ICountry[] | null,
+  borderClickHandler: (country: ICountry) => void,
+  backButtonHandler: () => void
 }
 export default function CountryDetails(props: IProps) {
-  const { activeCountry, activeCountryHandler, removeCountryHandler } = props;
+  const { activeCountry, activeBorderCountries, backButtonHandler, borderClickHandler } = props;
   const commonNativeName = useRef<string>("");
   const [languages, setLanguages] = useState<string>("");
   const [currencies, setCurrencies] = useState<string>("");
@@ -23,23 +24,23 @@ export default function CountryDetails(props: IProps) {
     if (activeCountry.name.nativeName) {
       commonNativeName.current = activeCountry.name.nativeName[nameKeys[0]].common;
     }
+
     const currenciesArray = activeCountry.currencies ? Object.values(activeCountry.currencies) : [];
     const currencies = [];
     for (const currency of currenciesArray) {
       currencies.push(Object.values(currency)[0]);
     }
-    
     setCurrencies(currencies.join(", "));
     
     const languagesArray = activeCountry.languages ? Object.values(activeCountry.languages) : [];
     setLanguages(languagesArray.join(", "));
-    
+
     console.log(activeCountry)
   }, [activeCountry]);
 
   return (
     <div className="country-details-page-wrapper">
-      <Button callbackHandler={ removeCountryHandler } value="back" />
+      <BackButton callbackHandler={ backButtonHandler } value="back" />
       <div className="country-details-wrapper">
         <img src={ activeCountry.flags.png } alt={ activeCountry.flags.alt } />
         <div className="country-details-container">
@@ -98,12 +99,15 @@ export default function CountryDetails(props: IProps) {
             <h3>Border countries: </h3>
             <div>
               {
-                activeCountry.borders?.map((borderCountry, i) => {
-                return <Button 
-                value={ borderCountry }
+                activeBorderCountries ? activeBorderCountries.map((borderCountry, i) => {
+                return <Button
+                country={ borderCountry }
+                borderClickHandler={ borderClickHandler }
                 key={ i }
                 />
               })
+              :
+              null
               }
             </div> 
           </div> 

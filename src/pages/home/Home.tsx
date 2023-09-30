@@ -7,10 +7,10 @@ import Card from "../../components/card/Card";
 
 interface IProps {
   countries: ICountry[],
-  activeCountryHandler: (country: ICountry) => void
+  countryClickHandler: (country: ICountry) => void
 }
 export default function Home(props: IProps) {
-  const { countries, activeCountryHandler } = props;
+  const { countries, countryClickHandler } = props;
   const [filteredCountries, setFilteredCountries] = useState(countries);
   
   function filterCountries(region: string): void {
@@ -38,7 +38,7 @@ export default function Home(props: IProps) {
       </div>
       <div className="cards-wrapper">
       {
-        filteredCountries?.map((country, i) => <Card country={ country } key={ i } activeCountryHandler={ activeCountryHandler } />)
+        filteredCountries?.map((country, i) => <Card country={ country } key={ i } countryClickHandler={ countryClickHandler } />)
       }
       </div>
     </main>
