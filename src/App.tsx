@@ -8,6 +8,7 @@ import Home from "./pages/home/Home";
 function App() {
   const [countries, setCountries] = useState<ICountry[]>();
   const [activeCountry, setActiveCountry] = useState<null | ICountry>(null);
+  const [borderCountries, setBorderCountries] = useState<null | ICountry[]>(null);
   
   useEffect(() => {
     (async() => {
@@ -25,17 +26,26 @@ function App() {
     })();
   }, [])
 
-  useEffect(() => {
-    if (countries) {
-      console.log(countries);
-    }
-  }, [countries])
-
-  function activeCountryHandler(country: ICountry): void {
+  function changeActiveCountry(country: ICountry): void {
     setActiveCountry(country);
+    changeBorderCountries(country);
   }
 
-  function removeCountryHandler(): void {
+  function changeBorderCountries(country: ICountry): void {
+    const borders = country.borders;
+    const currentBorderCountries: ICountry[] = [];
+
+    borders?.forEach(border => {
+      const match = countries?.find(country => country.cca3 === border);
+      if (match) {
+        currentBorderCountries.push(match);
+      }
+    });
+
+    setBorderCountries(currentBorderCountries);
+  }
+
+  function resetCountry(): void {
     setActiveCountry(null);
   }
 
@@ -46,12 +56,13 @@ function App() {
         activeCountry
         ? <CountryDetails 
             activeCountry={ activeCountry }
-            removeCountryHandler={ removeCountryHandler }
-            activeCountryHandler={ activeCountryHandler }
+            backButtonHandler={ resetCountry }
+            borderClickHandler={ changeActiveCountry }
+            activeBorderCountries={ borderCountries }
           />
         :
         countries 
-        ? <Home countries={ countries } activeCountryHandler={ activeCountryHandler } />
+        ? <Home countries={ countries } countryClickHandler={ changeActiveCountry } />
         :
         null
       }
