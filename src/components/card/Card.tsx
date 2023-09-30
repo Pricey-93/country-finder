@@ -23,7 +23,7 @@ export default function Card(props: IProps) {
         </div>
         <div className="card-details-wrapper">
           <dt>Capital</dt>
-          <dd>{ country?.capital }</dd>
+          <dd>{ country.capital ? country.capital.join(", "): "" }</dd>
         </div>
       </dl>
     </div>
