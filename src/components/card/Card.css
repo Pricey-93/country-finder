@@ -1,8 +1,9 @@
 .card-container {
-  overflow: hidden;
   max-width: 300px;
   border: 0;
   border-radius: 5px;
+  cursor: pointer;
+  overflow: hidden;
   background-color: var(--standard-white);
   box-shadow: var(--light-mode-box-shadow);
 }
