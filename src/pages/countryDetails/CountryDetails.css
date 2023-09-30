@@ -1,0 +1,25 @@
+.country-details-page-wrapper {
+  padding: 2rem;
+}
+.country-details-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.country-details-container {
+  display: flex;
+  flex-direction: column;
+}
+.country-details-lists-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.border-countries-container {
+  padding: 0 1.5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.country-details-list-right {
+  max-width: 400px;
+}

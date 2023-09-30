@@ -6,13 +6,14 @@ import RegionFilter from "../../components/ui/regionFilter/RegionFilter";
 import Card from "../../components/card/Card";
 
 interface IProps {
-  countries: null | ICountry[]
+  countries: ICountry[],
+  countryClickHandler: (country: ICountry) => void
 }
 export default function Home(props: IProps) {
-  const { countries } = props;
+  const { countries, countryClickHandler } = props;
   const [filteredCountries, setFilteredCountries] = useState(countries);
   
-  function filterCountries(region: string):void {
+  function filterCountries(region: string): void {
     if (region === "Filter by Region") {
       setFilteredCountries(countries);
     }
@@ -21,8 +22,8 @@ export default function Home(props: IProps) {
     setFilteredCountries(filtered);
     }
   }
-
-  function searchCountries(name: string):void {
+ 
+  function searchCountries(name: string): void {
     const searchResult = countries?.filter(country => country.name.common.toUpperCase() === name.toUpperCase());
     if (searchResult?.length > 0) {
       setFilteredCountries(searchResult);
@@ -37,7 +38,7 @@ export default function Home(props: IProps) {
       </div>
       <div className="cards-wrapper">
       {
-        filteredCountries?.map((country, i) => <Card country={country} key={i} />)
+        filteredCountries?.map((country, i) => <Card country={ country } key={ i } countryClickHandler={ countryClickHandler } />)
       }
       </div>
     </main>
