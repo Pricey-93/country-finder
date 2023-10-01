@@ -4,8 +4,8 @@
   border-radius: 5px;
   cursor: pointer;
   overflow: hidden;
-  background-color: var(--standard-white);
-  box-shadow: var(--light-mode-box-shadow);
+  background-color: var(--elements);
+  box-shadow: var(--box-shadow);
 }
 .country-flag {
   /* max-width: 100%; */
