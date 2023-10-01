@@ -3,7 +3,7 @@
   margin: 0;
   box-sizing: border-box;
   color: var(--text);
-  transition: all 3s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 
 :root {
