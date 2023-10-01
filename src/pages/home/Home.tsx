@@ -22,9 +22,9 @@ export default function Home(props: IProps) {
     setFilteredCountries(filtered);
     }
   }
- 
-  function searchCountries(name: string): void {
-    const searchResult = countries?.filter(country => country.name.common.toUpperCase() === name.toUpperCase());
+
+  function searchCountries(userInput: string): void {
+    const searchResult = countries?.filter(country => country.name.common.toUpperCase().includes(userInput.toUpperCase()));
     if (searchResult?.length > 0) {
       setFilteredCountries(searchResult);
     }

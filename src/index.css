@@ -2,6 +2,8 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  color: var(--text);
+  transition: all 1s ease-in-out;
 }
 
 :root {
@@ -9,16 +11,19 @@
   --home-page-body-text-size: 14px;
   --details-page-body-text-size: 16px;
 
-  --light-mode-text: hsl(200, 15%, 8%);
-  --light-mode-input: hsl(0, 0%, 52%);
-  --light-mode-background: hsl(0, 0%, 98%);
-  --standard-white: hsl(0, 0%, 100%);
-  --light-mode-box-shadow: rgba(100, 100, 111, 0.2) 0px 0px 5px 0px;
+  --text: hsl(200, 15%, 8%);
+  --input: hsl(0, 0%, 52%);
+  --background: hsl(0, 0%, 98%);
+  --elements: hsl(0, 0%, 100%);
+  --box-shadow: rgba(100, 100, 111, 0.2) 0px 0px 5px 0px;
+}
 
-  --dark-mode-background: hsl(207, 26%, 17%);
-  --dark-mode-elements: hsl(209, 23%, 22%);
+[data-theme="dark"] {
+  --text: hsl(0, 0%, 100%);
+  --background: hsl(207, 26%, 17%);
+  --elements: hsl(209, 23%, 22%);
 }
 
 body {
-  background-color: var(--light-mode-background);
+  background-color: var(--background);
 }
