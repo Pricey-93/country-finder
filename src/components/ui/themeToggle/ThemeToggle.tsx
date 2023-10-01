@@ -18,6 +18,17 @@ export default function ThemeToggle() {
     setTheme(THEME.dark)
   }
 
+  function getStoredTheme() {
+    const userTheme = localStorage.getItem("selectedTheme");
+    switch (userTheme) {
+      case "dark": setTheme(THEME.dark);
+        break;
+      default: setTheme(THEME.light);
+    }
+  }
+  
+  getStoredTheme();
+
   return (
     <button 
     className="theme-toggle-button" 
