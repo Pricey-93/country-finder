@@ -11,14 +11,7 @@ export default function SearchInput(props: IProps) {
     name="country-search" 
     className="country-search-input"
     placeholder="Search for a country..."
-    onKeyDown= {
-      (event) => {
-        if (event.key === "Enter") {
-          const inputElement = event.target as HTMLInputElement;
-          searchCountries(inputElement.value);
-        }
-      } 
-    } 
+    onChange={ (e) => searchCountries(e.target.value) } 
     />
   )
 } 
