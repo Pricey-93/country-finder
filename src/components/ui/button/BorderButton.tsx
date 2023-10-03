@@ -1,3 +1,4 @@
+import "./BorderButton.css";
 import { ICountry } from "../../../../ICountry";
 
 interface Iprops {
@@ -8,6 +9,6 @@ export default function Button(props: Iprops) {
   const { borderClickHandler, country } = props;
 
   return (
-    <button onClick={ () => borderClickHandler(country) }>{ country.name.common }</button>
+    <button className="border-button" onClick={ () => borderClickHandler(country) }>{ country.name.common }</button>
   )
 }
