@@ -1,7 +1,11 @@
-button {
-  padding: 0rem 1rem 0rem;
+.back-button {
+  margin-bottom: 2rem;
+  padding: 0.2rem 1.5rem 0.2rem;
   border: 0;
   background-color: var(--elements);
   box-shadow: var(--box-shadow);
   cursor: pointer;
+}
+.fa-arrow-left {
+  margin-right: 0.5rem;
 }

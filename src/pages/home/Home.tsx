@@ -1,6 +1,6 @@
 import "./Home.css";
 import { useState } from "react";
-import { ICountry } from "../../../ICountry";
+import { ICountry } from "../../api/ICountry";
 import SearchInput from "../../components/ui/searchInput/SearchInput";
 import RegionFilter from "../../components/ui/regionFilter/RegionFilter";
 import Card from "../../components/card/Card";

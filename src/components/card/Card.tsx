@@ -1,5 +1,5 @@
 import "./Card.css";
-import { ICountry } from "../../../ICountry";
+import { ICountry } from "../../api/ICountry";
 
 interface IProps {
   country: ICountry,

@@ -1,6 +1,6 @@
 import "./CountryDetails.css";
 import { useEffect, useRef, useState } from "react";
-import { ICountry } from "../../../ICountry";
+import { ICountry } from "../../api/ICountry";
 import BackButton from "../../components/ui/backButton/BackButton";
 import Button from "../../components/ui/button/BorderButton";
 
@@ -97,7 +97,7 @@ export default function CountryDetails(props: IProps) {
           </div>
           <div className="border-countries-container">
             <h3>Border countries: </h3>
-            <div>
+            <div className="border-country-buttons">
               {
                 activeBorderCountries ? activeBorderCountries.map((borderCountry, i) => {
                 return <Button

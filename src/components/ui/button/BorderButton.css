@@ -1,0 +1,7 @@
+.border-button {
+  width: 130px;
+  border: 0;
+  background-color: var(--element);
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+}
