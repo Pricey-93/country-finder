@@ -1,4 +1,8 @@
+import { useState } from "react";
+import "./ThemeToggle.css";
+
 export default function ThemeToggle() {
+  const [icon, setIcon] = useState<string>("fa-solid fa-moon");
   const body = document.querySelector("body");
   enum THEME {
     dark = "dark",
@@ -10,12 +14,20 @@ export default function ThemeToggle() {
     localStorage.setItem("selectedTheme", theme);
   }
 
-  function toggleTheme() {
-    body?.getAttribute("data-theme") === "dark" 
-    ?
-    setTheme(THEME.light)
+  function setThemeIcon(theme: THEME): void {
+    theme === "light" ? 
+    setIcon("fa-solid fa-sun")
     :
-    setTheme(THEME.dark)
+    setIcon("fa-solid fa-moon")
+  }
+
+  function toggleTheme() {
+    const theme = body?.getAttribute("data-theme");
+    switch (theme) {
+      case "dark": {setTheme(THEME.light); setThemeIcon(THEME.light);}
+        break;
+      case "light": {setTheme(THEME.dark); setThemeIcon(THEME.dark);}
+    }
   }
 
   function getStoredTheme() {
@@ -33,6 +45,6 @@ export default function ThemeToggle() {
     <button 
     className="theme-toggle-button" 
     onClick={ () => toggleTheme() }
-    >[icon] Dark Mode</button>
+    ><i className={ icon }></i>Dark Mode</button>
   )
 }
