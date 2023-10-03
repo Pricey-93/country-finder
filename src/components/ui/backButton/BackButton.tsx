@@ -8,6 +8,8 @@ export default function BackButton(props: Iprops) {
   const { callbackHandler, value } = props;
 
   return (
-    <button onClick={ () => callbackHandler() }>{ value }</button>
+    <button className="back-button" onClick={ () => callbackHandler() }>
+      <i className="fa-solid fa-arrow-left"></i>{ value }
+    </button>
   )
 }
