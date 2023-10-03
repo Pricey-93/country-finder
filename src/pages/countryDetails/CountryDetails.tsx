@@ -1,6 +1,6 @@
 import "./CountryDetails.css";
 import { useEffect, useRef, useState } from "react";
-import { ICountry } from "../../../ICountry";
+import { ICountry } from "../../api/ICountry";
 import BackButton from "../../components/ui/backButton/BackButton";
 import Button from "../../components/ui/button/BorderButton";
 

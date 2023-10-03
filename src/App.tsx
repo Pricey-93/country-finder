@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ICountry } from "../ICountry";
+import { ICountry } from "./api/ICountry";
 import fetchAllCountries from "./api/countries";
 import Header from "./components/header/Header";
 import CountryDetails from "./pages/countryDetails/CountryDetails";

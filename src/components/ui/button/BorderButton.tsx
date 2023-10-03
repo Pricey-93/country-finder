@@ -1,5 +1,5 @@
 import "./BorderButton.css";
-import { ICountry } from "../../../../ICountry";
+import { ICountry } from "../../../api/ICountry";
 
 interface Iprops {
   borderClickHandler: (country: ICountry) => void,
