@@ -97,7 +97,7 @@ export default function CountryDetails(props: IProps) {
           </div>
           <div className="border-countries-container">
             <h3>Border countries: </h3>
-            <div>
+            <div className="border-country-buttons">
               {
                 activeBorderCountries ? activeBorderCountries.map((borderCountry, i) => {
                 return <Button

@@ -23,3 +23,8 @@
 .country-details-list-right {
   max-width: 400px;
 }
+.border-country-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
