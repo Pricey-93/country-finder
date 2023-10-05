@@ -1,4 +1,3 @@
-import "./CountryDetails.css";
 import { useEffect, useRef, useState } from "react";
 import { ICountry } from "../../api/ICountry";
 import BackButton from "../../components/ui/backButton/BackButton";
