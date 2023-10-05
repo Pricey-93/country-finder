@@ -1,11 +1,10 @@
-import "./BorderButton.css";
 import { ICountry } from "../../../api/ICountry";
 
 interface Iprops {
   borderClickHandler: (country: ICountry) => void,
   country: ICountry,
 }
-export default function Button(props: Iprops) {
+export default function BorderButton(props: Iprops) {
   const { borderClickHandler, country } = props;
 
   return (

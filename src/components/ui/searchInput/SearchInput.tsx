@@ -1,5 +1,3 @@
-import "./SearchInput.css";
-
 interface IProps {
   searchCountries: (name: string) => void 
 }
