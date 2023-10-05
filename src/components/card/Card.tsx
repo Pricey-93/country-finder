@@ -1,4 +1,3 @@
-import "./Card.css";
 import { ICountry } from "../../api/ICountry";
 
 interface IProps {

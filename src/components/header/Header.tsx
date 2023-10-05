@@ -1,5 +1,4 @@
 import ThemeToggle from "../ui/themeToggle/ThemeToggle";
-import "./Header.css";
 
 export default function Header() {
   

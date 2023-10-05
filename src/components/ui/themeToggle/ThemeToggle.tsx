@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./ThemeToggle.css";
 
 export default function ThemeToggle() {
   const [icon, setIcon] = useState<string>("fa-solid fa-moon");

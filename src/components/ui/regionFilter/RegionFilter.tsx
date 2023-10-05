@@ -1,6 +1,3 @@
-// import { useState } from "react";
-import "./RegionFilter.css";
-
 interface IProps {
   filterCountries: (region: string) => void
 }

@@ -1,4 +1,3 @@
-import "./BorderButton.css";
 import { ICountry } from "../../../api/ICountry";
 
 interface Iprops {

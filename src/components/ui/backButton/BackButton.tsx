@@ -1,5 +1,3 @@
-import "./BackButton.css";
-
 interface Iprops {
   callbackHandler: () => void,
   value: string

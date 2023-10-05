@@ -1,4 +1,3 @@
-import "./Home.css";
 import { useState } from "react";
 import { ICountry } from "../../api/ICountry";
 import SearchInput from "../../components/ui/searchInput/SearchInput";
