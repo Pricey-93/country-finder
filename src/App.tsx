@@ -1,9 +1,18 @@
 import { useEffect, useState } from "react";
 import { ICountry } from "./api/ICountry";
 import fetchAllCountries from "./api/countries";
-import Header from "./components/header/Header";
 import CountryDetails from "./pages/countryDetails/CountryDetails";
 import Home from "./pages/home/Home";
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+
+//layouts
+import RootLayout from './layouts/RootLayout';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/country-finder" element={ <RootLayout /> }></Route>
+  )
+)
 
 function App() {
   const [countries, setCountries] = useState<ICountry[]>();
@@ -51,7 +60,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <RouterProvider router={ router } />
       {
         activeCountry
         ? <CountryDetails 
