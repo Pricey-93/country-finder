@@ -6,11 +6,19 @@ import Home from "./pages/home/Home";
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
 //layouts
-import RootLayout from './layouts/RootLayout';
+import RootLayout from "./layouts/RootLayout";
+import CountryDetailsLayout from "./layouts/CountryDetailsLayout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/country-finder" element={ <RootLayout /> }></Route>
+    <>
+      <Route path="/country-finder" element={ <RootLayout /> }>
+        <Route index element={ <Home /> }></Route>
+      </Route>
+      <Route path="/country-finder/countries" element={ <CountryDetailsLayout /> }>
+        <Route path=":name" element={ <CountryDetails /> }></Route>
+      </Route>
+    </>
   )
 )
 
