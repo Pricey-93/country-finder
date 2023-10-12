@@ -70,16 +70,8 @@ function App() {
     <>
       <RouterProvider router={ router } />
       {
-        activeCountry
-        ? <CountryDetails 
-            activeCountry={ activeCountry }
-            backButtonHandler={ resetCountry }
-            borderClickHandler={ changeActiveCountry }
-            activeBorderCountries={ borderCountries }
-          />
-        :
-        countries 
-        ? <Home countries={ countries } countryClickHandler={ changeActiveCountry } />
+        countries ?
+        <Home countries={ countries } countryClickHandler={ changeActiveCountry } />
         :
         null
       }
@@ -88,3 +80,10 @@ function App() {
 }
 
 export default App;
+
+{/* <CountryDetails 
+            activeCountry={ activeCountry }
+            backButtonHandler={ resetCountry }
+            borderClickHandler={ changeActiveCountry }
+            activeBorderCountries={ borderCountries }
+          /> */}
