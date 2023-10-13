@@ -1,16 +1,48 @@
+import { useState } from "react";
+import { Outlet, useOutletContext, useLoaderData } from "react-router-dom";
 import Header from "../components/header/Header";
-import { Outlet, useLoaderData } from "react-router-dom";
-import fetchAllCountries from "../api/countries";
 import { ICountry } from "../api/ICountry";
+import fetchAllCountries from "../api/countries";
+
+
+type ContextType = {
+  countries: ICountry[],
+  getCountries: () => ICountry[],
+  searchByName: (userInput: string) => ICountry[],
+  changeActiveCountry: (country: ICountry) => void
+};
 
 export default function RootLayout() {
   const countries: ICountry[] = useLoaderData() as ICountry[];
-  console.log(countries);
+  const [activeCountry, setActiveCountry] = useState<null | ICountry>(null);
+  const [borderCountries, setBorderCountries] = useState<null | ICountry[]>(null);
 
-//Make a bunch of methods like getCountries, searchCountries,
-// and pass them down as an API for children elements to work with.
+  function changeActiveCountry(country: ICountry): void {
+    setActiveCountry(country);
+    changeBorderCountries(country);
+  }
 
-function getCountries() {return countries}
+  function changeBorderCountries(country: ICountry): void {
+    const borders = country.borders;
+    const currentBorderCountries: ICountry[] = [];
+
+    borders?.forEach(border => {
+      const match = countries?.find(country => country.cca3 === border);
+      if (match) {
+        currentBorderCountries.push(match);
+      }
+    });
+
+    setBorderCountries(currentBorderCountries);
+  }
+
+  function resetCountry(): void {
+    setActiveCountry(null);
+  }
+
+
+//Context methods
+function getCountries(): ICountry[] {return countries}
 
 function searchByName(userInput: string): ICountry[] {
   const searchResult = countries?.filter(country => country.name.common.toUpperCase().includes(userInput.toUpperCase()));
@@ -21,10 +53,17 @@ function searchByName(userInput: string): ICountry[] {
     <>
       <Header />
       <main>
-        <Outlet context={[getCountries, searchByName]}/>
+        <Outlet context={{countries, getCountries, searchByName, changeActiveCountry} satisfies ContextType}/>
       </main>
     </>
   )
+
+  // {/* <CountryDetails 
+//             activeCountry={ activeCountry }
+//             backButtonHandler={ resetCountry }
+//             borderClickHandler={ changeActiveCountry }
+//             activeBorderCountries={ borderCountries }
+//           /> */}
 
 }
 
@@ -40,4 +79,8 @@ export async function loader(): Promise<ICountry[]> {
     }
     return countries;
   }
+}
+
+export function useContext() {
+  return useOutletContext<ContextType>();
 }

@@ -1,17 +1,13 @@
 import { useState } from "react";
-import { ICountry } from "../../api/ICountry";
+import { useContext } from "../../layouts/RootLayout";
 import SearchInput from "../../components/ui/searchInput/SearchInput";
 import RegionFilter from "../../components/ui/regionFilter/RegionFilter";
 import Card from "../../components/card/Card";
 
-interface IProps {
-  countries: ICountry[],
-  countryClickHandler: (country: ICountry) => void
-}
-export default function Home(props: IProps) {
-  const { countries, countryClickHandler } = props;
+export default function Home() {
+  const { countries, changeActiveCountry } = useContext();
   const [filteredCountries, setFilteredCountries] = useState(countries);
-  
+
   function filterCountries(region: string): void {
     if (region === "Filter by Region") {
       setFilteredCountries(countries);
@@ -37,7 +33,7 @@ export default function Home(props: IProps) {
       </div>
       <div className="cards-wrapper">
       {
-        filteredCountries?.map((country, i) => <Card country={ country } key={ i } countryClickHandler={ countryClickHandler } />)
+        filteredCountries?.map((country, i) => <Card country={ country } key={ i } countryClickHandler={ changeActiveCountry } />)
       }
       </div>
     </main>
