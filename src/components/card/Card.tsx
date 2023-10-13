@@ -1,16 +1,21 @@
 import { ICountry } from "../../api/ICountry";
+import { useNavigate } from 'react-router-dom';
 
 interface IProps {
-  country: ICountry,
-  countryClickHandler: (country: ICountry) => void
+  country: ICountry
 }
 export default function Card(props: IProps) {
-  const { country, countryClickHandler } = props;
+  const { country } = props;
+  const navigate = useNavigate();
 
+  const cardClickHandler = () => {
+    // Navigate to the "test" path when the card is clicked
+    navigate(`countries/${country.name.common}`);
+  };
   return (
-    <div className="card-container" onClick={() => countryClickHandler(country)}>
-      <img className="country-flag" src={ country?.flags.png } alt={ country?.flags.alt } />
-      <h2 className="country-title">{ country?.name.common } </h2>
+    <div className="card-container" onClick={() => cardClickHandler()}>
+      <img className="country-flag" src={ country.flags.png } alt={ country.flags.alt } />
+      <h2 className="country-title">{ country.name.common } </h2>
       <dl className="card-details-list">
         <div className="card-details-wrapper">
           <dt>Population</dt>
@@ -18,7 +23,7 @@ export default function Card(props: IProps) {
         </div>
         <div className="card-details-wrapper">
           <dt>Region</dt>
-          <dd>{ country?.region }</dd>
+          <dd>{ country.region }</dd>
         </div>
         <div className="card-details-wrapper">
           <dt>Capital</dt>
