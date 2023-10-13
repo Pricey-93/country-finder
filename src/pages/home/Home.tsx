@@ -5,8 +5,10 @@ import RegionFilter from "../../components/ui/regionFilter/RegionFilter";
 import Card from "../../components/card/Card";
 
 export default function Home() {
-  const { countries, changeActiveCountry } = useContext();
-  const [filteredCountries, setFilteredCountries] = useState(countries);
+  const { countryManager } = useContext();
+  const countries = countryManager.getCountries();
+
+  const [filteredCountries, setFilteredCountries] = useState(countryManager.getCountries());
 
   function filterCountries(region: string): void {
     if (region === "Filter by Region") {
@@ -33,7 +35,7 @@ export default function Home() {
       </div>
       <div className="cards-wrapper">
       {
-        filteredCountries?.map((country, i) => <Card country={ country } key={ i } countryClickHandler={ changeActiveCountry } />)
+        filteredCountries?.map((country, i) => <Card country={ country } key={ i } />)
       }
       </div>
     </main>
