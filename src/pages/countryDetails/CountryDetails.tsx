@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { useContext } from "../../layouts/RootLayout";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ICountry } from "../../api/ICountry";
 import BackButton from "../../components/ui/backButton/BackButton";
 import BorderButton from "../../components/ui/borderButton/BorderButton";
 
 export default function CountryDetails() {
   const { countryManager } = useContext();
+  const navigate = useNavigate();
   let { name } = useParams();
-
+  
   const [activeCountry, setActiveCountry] = useState<null | ICountry>(null);
   const [borderCountries, setBorderCountries] = useState<null | ICountry[]>(null);
   const [commonNativeName, setCommonNativeName] = useState<string>("");
@@ -16,30 +17,64 @@ export default function CountryDetails() {
   const [currencies, setCurrencies] = useState<string>("");
 
   useEffect(() => {
+    setCountry();
+    setName(extractNameKeys()); 
+    setBorderCountries(extractBorderCountries());
+
+    const currencies = extractCurrencies();
+    setCurrencies(currencies.join(", "));
+    
+    const languagesArray = extractLanguages();
+    setLanguages(languagesArray.join(", "));
+
+    console.log(activeCountry);
+  }, [activeCountry]);
+
+  function setCountry() {
     if (name) {
       setActiveCountry(countryManager.getCountryByName(name));
     }
-  
+  }
+  function extractNameKeys() {
     const nameKeys = [];
     for (const key in activeCountry?.name.nativeName) {
       nameKeys.push(key);
     }
+    return nameKeys;
+  }
+  function setName(nameKeys: string[]) {
     if (activeCountry?.name.nativeName) {
       setCommonNativeName(activeCountry.name.nativeName[nameKeys[0]].common);
     }
-
+  }
+  function extractCurrencies() {
     const currenciesArray = activeCountry?.currencies ? Object.values(activeCountry.currencies) : [];
     const currencies = [];
     for (const currency of currenciesArray) {
       currencies.push(Object.values(currency)[0]);
     }
-    setCurrencies(currencies.join(", "));
-    
-    const languagesArray = activeCountry?.languages ? Object.values(activeCountry.languages) : [];
-    setLanguages(languagesArray.join(", "));
+    return currencies;
+  }
+  function extractLanguages() {
+    return activeCountry?.languages ? Object.values(activeCountry.languages) : [];
+  }
+  function extractBorderCountries(): ICountry[] {
+    const borders = activeCountry?.borders;
+    const currentBorderCountries: ICountry[] = [];
+    const countries = countryManager.getCountries();
+    borders?.forEach(border => {
+      const match = countries.find(country => country.cca3 === border);
+      if (match) {
+        currentBorderCountries.push(match);
+      }
+    });
+    return currentBorderCountries;
+  }
+  function borderClickHandler(country: ICountry) {
+    // setActiveCountry(country);
+    // navigate(`/country-finder/countries/${activeCountry?.name.common}`);
+  }
 
-    console.log(activeCountry)
-  }, [activeCountry]);
 
   return (
     <div className="country-details-page-wrapper">
@@ -101,21 +136,20 @@ export default function CountryDetails() {
           <div className="border-countries-container">
             <h3>Border countries: </h3>
             <div className="border-country-buttons">
-              {/* {
+              {
                 borderCountries ? borderCountries.map((borderCountry, i) => {
                 return <BorderButton
+                borderClickHandler={ borderClickHandler }
                 country={ borderCountry }
-                borderClickHandler={ changeActiveCountry }
                 key={ i }
                 />
               })
               :
               null
-              } */}
+              }
             </div> 
           </div> 
         </div>
-        
       </div>
     </div>
   )
