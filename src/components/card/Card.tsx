@@ -9,9 +9,9 @@ export default function Card(props: IProps) {
   const navigate = useNavigate();
 
   const cardClickHandler = () => {
-    // Navigate to the "test" path when the card is clicked
     navigate(`countries/${country.name.common}`);
   };
+  
   return (
     <div className="card-container" onClick={() => cardClickHandler()}>
       <img className="country-flag" src={ country.flags.png } alt={ country.flags.alt } />
