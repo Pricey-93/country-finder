@@ -1,4 +1,6 @@
-export default async function fetchAllCountries() {
+import { ICountry } from "./ICountry";
+
+export default async function fetchAllCountries(): Promise<ICountry[]> {
   try {
     const response = await fetch("https://restcountries.com/v3.1/all", {
       method: "GET",
