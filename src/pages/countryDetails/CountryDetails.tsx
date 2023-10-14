@@ -1,76 +1,104 @@
-import { useEffect, useRef, useState } from "react";
-import { ICountry } from "../../api/ICountry";
+import { useEffect, useState } from "react";
+import { useContext } from "../../layouts/RootLayout";
+import { useParams, useNavigate } from "react-router-dom";
+import { ICountry, Translation } from "../../api/ICountry";
 import BackButton from "../../components/ui/backButton/BackButton";
 import BorderButton from "../../components/ui/borderButton/BorderButton";
 
-interface IProps {
-  activeCountry: ICountry,
-  activeBorderCountries: ICountry[] | null,
-  borderClickHandler: (country: ICountry) => void,
-  backButtonHandler: () => void
-}
-export default function CountryDetails(props: IProps) {
-  const { activeCountry, activeBorderCountries, backButtonHandler, borderClickHandler } = props;
-  const commonNativeName = useRef<string>("");
+export default function CountryDetails() {
+  const { countryManager } = useContext();
+  const { name } = useParams();
+  const navigate = useNavigate();
+
+  const [activeCountry, setActiveCountry] = useState<null | ICountry>(null);
+  const [borderCountries, setBorderCountries] = useState<null | ICountry[]>(null);
+  const [commonNativeName, setCommonNativeName] = useState<string>("");
   const [languages, setLanguages] = useState<string>("");
   const [currencies, setCurrencies] = useState<string>("");
 
   useEffect(() => {
-    const nameKeys = [];
-    for (const key in activeCountry.name.nativeName) {
-      nameKeys.push(key);
+    if (name) {
+      setActiveCountry(countryManager.getCountryByName(name));
     }
-    if (activeCountry.name.nativeName) {
-      commonNativeName.current = activeCountry.name.nativeName[nameKeys[0]].common;
-    }
+  }, [name, countryManager]);
 
-    const currenciesArray = activeCountry.currencies ? Object.values(activeCountry.currencies) : [];
-    const currencies = [];
-    for (const currency of currenciesArray) {
-      currencies.push(Object.values(currency)[0]);
-    }
+  useEffect(() => {
+    const nameValues = extractNameKeys();
+    setCommonNativeName(nameValues.length > 0 ? nameValues[0].common : "");
+
+    const currencies = extractCurrencies();
     setCurrencies(currencies.join(", "));
-    
-    const languagesArray = activeCountry.languages ? Object.values(activeCountry.languages) : [];
+
+    const languagesArray = extractLanguages();
     setLanguages(languagesArray.join(", "));
 
-    console.log(activeCountry)
+    setBorderCountries(extractBorderCountries());
   }, [activeCountry]);
+
+  function extractNameKeys(): Translation[] {
+    return Object.values(activeCountry?.name.nativeName || {});
+  }
+
+  function extractCurrencies() {
+    return Object.values(activeCountry?.currencies || {}).map(currency => currency.name);
+  }
+
+  function extractLanguages() {
+    return Object.values(activeCountry?.languages || {});
+  }
+
+  function extractBorderCountries(): ICountry[] {
+    const borders = activeCountry?.borders;
+    const currentBorderCountries: ICountry[] = [];
+    const countries = countryManager.getCountries();
+    borders?.forEach(border => {
+      const match = countries.find(country => country.cca3 === border);
+      if (match) {
+        currentBorderCountries.push(match);
+      }
+    });
+    return currentBorderCountries;
+  }
+
+  function borderClickHandler(country: ICountry) {
+    setActiveCountry(country);
+    navigate(`/country-finder/countries/${country.name.common.toLowerCase()}`);
+  }
 
   return (
     <div className="country-details-page-wrapper">
-      <BackButton callbackHandler={ backButtonHandler } value="back" />
+      <BackButton value="back" />
       <div className="country-details-wrapper">
-        <img src={ activeCountry.flags.png } alt={ activeCountry.flags.alt } />
+        <img src={ activeCountry?.flags.png } alt={ activeCountry?.flags.alt } />
         <div className="country-details-container">
-          <h2 className="country-title"> { activeCountry.name.common } </h2>
+          <h2 className="country-title"> { activeCountry?.name.common } </h2>
           <div className="country-details-lists-wrapper">
 
             <dl className="country-details-list-left">
 
               <div className="country-details">
                 <dt>Native Name</dt>
-                <dd> { commonNativeName.current } </dd>
+                <dd> { commonNativeName } </dd>
               </div>
 
               <div className="country-details">
                 <dt>Population</dt>
-                <dd> { activeCountry.population.toLocaleString() } </dd>
+                <dd> { activeCountry?.population.toLocaleString() } </dd>
               </div>
 
               <div className="country-details">
                 <dt>Region</dt>
-                <dd> { activeCountry.region } </dd>
+                <dd> { activeCountry?.region } </dd>
               </div>
 
               <div className="country-details">
                 <dt>Sub Region</dt>
-                <dd> { activeCountry.subregion } </dd>
+                <dd> { activeCountry?.subregion } </dd>
               </div>
 
               <div className="country-details">
                 <dt>Capital</dt>
-                <dd> { activeCountry.capital ? activeCountry.capital.join(", ") : null } </dd>
+                <dd> { activeCountry?.capital ? activeCountry.capital.join(", ") : null } </dd>
               </div>
 
             </dl>
@@ -79,7 +107,7 @@ export default function CountryDetails(props: IProps) {
 
               <div className="country-details">
                 <dt>Top Level Domain</dt>
-                <dd> { activeCountry.tld } </dd>
+                <dd> { activeCountry?.tld } </dd>
               </div>
 
               <div className="country-details">
@@ -98,10 +126,10 @@ export default function CountryDetails(props: IProps) {
             <h3>Border countries: </h3>
             <div className="border-country-buttons">
               {
-                activeBorderCountries ? activeBorderCountries.map((borderCountry, i) => {
+                borderCountries ? borderCountries.map((borderCountry, i) => {
                 return <BorderButton
-                country={ borderCountry }
                 borderClickHandler={ borderClickHandler }
+                country={ borderCountry }
                 key={ i }
                 />
               })
@@ -111,7 +139,6 @@ export default function CountryDetails(props: IProps) {
             </div> 
           </div> 
         </div>
-        
       </div>
     </div>
   )
