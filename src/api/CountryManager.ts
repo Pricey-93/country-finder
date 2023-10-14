@@ -9,7 +9,7 @@ export default class CountryManager {
   getCountries(): ICountry[] {return this.countries};
 
   getCountryByName(name: string): ICountry | null {
-    const country = this.countries.find(country => country.name.common.toUpperCase() === name.toUpperCase());
+    const country = this.countries.find(country => country.name.common.toLowerCase() === name.toLowerCase());
     if (country) {
       return country
     }
@@ -17,7 +17,7 @@ export default class CountryManager {
   }
 
   searchByName(userInput: string): ICountry[] {
-    const searchResult = this.countries.filter(country => country.name.common.toUpperCase().includes(userInput.toUpperCase()));
+    const searchResult = this.countries.filter(country => country.name.common.toLowerCase().includes(userInput.toLowerCase()));
     return searchResult;
   }
 }
