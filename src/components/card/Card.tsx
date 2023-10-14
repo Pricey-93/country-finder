@@ -9,7 +9,7 @@ export default function Card(props: IProps) {
   const navigate = useNavigate();
 
   const cardClickHandler = () => {
-    navigate(`countries/${country.name.common}`);
+    navigate(`countries/${country.name.common.toLowerCase()}`);
   };
   
   return (
