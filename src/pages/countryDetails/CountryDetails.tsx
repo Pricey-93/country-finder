@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { useContext } from "../../layouts/RootLayout";
-import { useNavigate, useParams } from "react-router-dom";
-import { ICountry } from "../../api/ICountry";
+import { useParams, useNavigate } from "react-router-dom";
+import { ICountry, Translation } from "../../api/ICountry";
 import BackButton from "../../components/ui/backButton/BackButton";
 import BorderButton from "../../components/ui/borderButton/BorderButton";
 
 export default function CountryDetails() {
   const { countryManager } = useContext();
+  const { name } = useParams();
   const navigate = useNavigate();
-  let { name } = useParams();
-  
+
   const [activeCountry, setActiveCountry] = useState<null | ICountry>(null);
   const [borderCountries, setBorderCountries] = useState<null | ICountry[]>(null);
   const [commonNativeName, setCommonNativeName] = useState<string>("");
@@ -17,47 +17,36 @@ export default function CountryDetails() {
   const [currencies, setCurrencies] = useState<string>("");
 
   useEffect(() => {
-    setCountry();
-    setName(extractNameKeys()); 
-    setBorderCountries(extractBorderCountries());
-
-    const currencies = extractCurrencies();
-    setCurrencies(currencies.join(", "));
-    
-    const languagesArray = extractLanguages();
-    setLanguages(languagesArray.join(", "));
-
-    console.log(activeCountry);
-  }, [activeCountry]);
-
-  function setCountry() {
     if (name) {
       setActiveCountry(countryManager.getCountryByName(name));
     }
+  }, [name, countryManager]);
+
+  useEffect(() => {
+    const nameValues = extractNameKeys();
+    setCommonNativeName(nameValues.length > 0 ? nameValues[0].common : "");
+
+    const currencies = extractCurrencies();
+    setCurrencies(currencies.join(", "));
+
+    const languagesArray = extractLanguages();
+    setLanguages(languagesArray.join(", "));
+
+    setBorderCountries(extractBorderCountries());
+  }, [activeCountry]);
+
+  function extractNameKeys(): Translation[] {
+    return Object.values(activeCountry?.name.nativeName || {});
   }
-  function extractNameKeys() {
-    const nameKeys = [];
-    for (const key in activeCountry?.name.nativeName) {
-      nameKeys.push(key);
-    }
-    return nameKeys;
-  }
-  function setName(nameKeys: string[]) {
-    if (activeCountry?.name.nativeName) {
-      setCommonNativeName(activeCountry.name.nativeName[nameKeys[0]].common);
-    }
-  }
+
   function extractCurrencies() {
-    const currenciesArray = activeCountry?.currencies ? Object.values(activeCountry.currencies) : [];
-    const currencies = [];
-    for (const currency of currenciesArray) {
-      currencies.push(Object.values(currency)[0]);
-    }
-    return currencies;
+    return Object.values(activeCountry?.currencies || {}).map(currency => currency.name);
   }
+
   function extractLanguages() {
-    return activeCountry?.languages ? Object.values(activeCountry.languages) : [];
+    return Object.values(activeCountry?.languages || {});
   }
+
   function extractBorderCountries(): ICountry[] {
     const borders = activeCountry?.borders;
     const currentBorderCountries: ICountry[] = [];
@@ -70,11 +59,11 @@ export default function CountryDetails() {
     });
     return currentBorderCountries;
   }
-  function borderClickHandler(country: ICountry) {
-    // setActiveCountry(country);
-    // navigate(`/country-finder/countries/${activeCountry?.name.common}`);
-  }
 
+  function borderClickHandler(country: ICountry) {
+    setActiveCountry(country);
+    navigate(`/country-finder/countries/${country.name.common.toLowerCase()}`);
+  }
 
   return (
     <div className="country-details-page-wrapper">
