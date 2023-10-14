@@ -11,32 +11,11 @@ type ContextType = {
 export default function RootLayout() {
   const countryManager = new CountryManager(useLoaderData() as ICountry[]);
 
-  // function changeActiveCountry(country: ICountry): void {
-  //   setActiveCountry(country);
-  //   changeBorderCountries(country);
-  //   // const navigate = useNavigate();
-  //   // navigate(`countries/${activeCountry?.name.common}`);
-  // }
-
-  // function changeBorderCountries(country: ICountry): void {
-  //   const borders = country.borders;
-  //   const currentBorderCountries: ICountry[] = [];
-
-  //   borders?.forEach(border => {
-  //     const match = countries?.find(country => country.cca3 === border);
-  //     if (match) {
-  //       currentBorderCountries.push(match);
-  //     }
-  //   });
-
-  //   setBorderCountries(currentBorderCountries);
-  // }
-
   return (
     <>
       <Header />
       <main>
-        <Outlet context={{ countryManager } satisfies ContextType}/>
+        <Outlet context={ { countryManager } satisfies ContextType }/>
       </main>
     </>
   )
@@ -57,6 +36,4 @@ export async function loader(): Promise<ICountry[]> {
   }
 }
 
-export function useContext() {
-  return useOutletContext<ContextType>();
-}
+export function useContext() {return useOutletContext<ContextType>();}
