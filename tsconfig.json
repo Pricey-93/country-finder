@@ -6,7 +6,6 @@
     "module": "ESNext",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["jest", "jest-environment-jsdom", "@testing-library/jest-dom"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -22,6 +21,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "./jest.setup.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
