@@ -1,13 +1,10 @@
-import type {Config} from 'jest';
+import type { Config } from "jest";
 
 const config: Config = {
-  clearMocks: true,
-  coverageProvider: "v8",
-  testEnvironment: 'node',
+  preset: "ts-jest",
   verbose: true,
-  roots: ["<rootDir>/src"],
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"]
+  testEnvironment: "jest-environment-jsdom",
+  setupFilesAfterEnv: ["./jest.setup.ts"],
 };
 
 export default config;
