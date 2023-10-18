@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useContext } from "../../layouts/RootLayout";
 import { useParams, useNavigate } from "react-router-dom";
-import { ICountry, Translation } from "../../api/ICountry";
+import { ICountry } from "../../api/ICountry";
 import BackButton from "../../components/ui/backButton/BackButton";
 import BorderButton from "../../components/ui/borderButton/BorderButton";
 
@@ -10,8 +10,8 @@ export default function CountryDetails() {
   const { name } = useParams();
   const navigate = useNavigate();
 
-  const [activeCountry, setActiveCountry] = useState<null | ICountry>(null);
-  const [borderCountries, setBorderCountries] = useState<null | ICountry[]>(null);
+  const [activeCountry, setActiveCountry] = useState<undefined | ICountry>();
+  const [borderCountries, setBorderCountries] = useState<undefined | ICountry[]>();
   const [commonNativeName, setCommonNativeName] = useState<string>("");
   const [languages, setLanguages] = useState<string>("");
   const [currencies, setCurrencies] = useState<string>("");
@@ -23,42 +23,17 @@ export default function CountryDetails() {
   }, [name, countryManager]);
 
   useEffect(() => {
-    const nameValues = extractNameKeys();
+    const nameValues = countryManager.extractNameKeys(activeCountry);
     setCommonNativeName(nameValues.length > 0 ? nameValues[0].common : "");
 
-    const currencies = extractCurrencies();
+    const currencies = countryManager.extractCurrencies(activeCountry);
     setCurrencies(currencies.join(", "));
 
-    const languagesArray = extractLanguages();
+    const languagesArray = countryManager.extractLanguages(activeCountry);
     setLanguages(languagesArray.join(", "));
 
-    setBorderCountries(extractBorderCountries());
+    setBorderCountries(countryManager.extractBorderCountries(activeCountry));
   }, [activeCountry]);
-
-  function extractNameKeys(): Translation[] {
-    return Object.values(activeCountry?.name.nativeName || {});
-  }
-
-  function extractCurrencies() {
-    return Object.values(activeCountry?.currencies || {}).map(currency => currency.name);
-  }
-
-  function extractLanguages() {
-    return Object.values(activeCountry?.languages || {});
-  }
-
-  function extractBorderCountries(): ICountry[] {
-    const borders = activeCountry?.borders;
-    const currentBorderCountries: ICountry[] = [];
-    const countries = countryManager.getCountries();
-    borders?.forEach(border => {
-      const match = countries.find(country => country.cca3 === border);
-      if (match) {
-        currentBorderCountries.push(match);
-      }
-    });
-    return currentBorderCountries;
-  }
 
   function borderClickHandler(country: ICountry) {
     setActiveCountry(country);
