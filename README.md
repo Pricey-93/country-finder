@@ -1,6 +1,6 @@
 # Country-Finder
 
-## Table of contents
+## Table of Contents
 
 - [Overview](#overview)
   - [Country Finder](#country-finder)
@@ -27,9 +27,9 @@ Users should be able to:
 - [Solution](https://github.com/Pricey-93/country-finder)
 - [Live Site](https://pricey-93.github.io/country-finder/)
 
-## My process
+## My Process
 
-### Built with
+### Built With
 
 - Semantic HTML5 markup
 - CSS custom properties
@@ -38,7 +38,7 @@ Users should be able to:
 - [React](https://reactjs.org/)
 - [React Router](https://reactrouter.com/en/main)
 
-### Continued development
+### Continued Development
 
 * User can see visualised infographic data such as charts and diagrams
 * User can add notes
