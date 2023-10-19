@@ -3,13 +3,11 @@
 ## Table of contents
 
 - [Overview](#overview)
-  - [Country Finder](#the-challenge)
+  - [Country Finder](#country-finder)
   - [Links](#links)
-- [My process](#my-process)
-  - [Built with](#built-with)
-  - [What I learnt](#what-i-learnt)
-  - [Continued development](#continued-development)
-- [Author](#author)
+- [My Process](#my-process)
+  - [Built With](#built-with)
+  - [Continued Development](#continued-development)
 
 ## Overview
 
