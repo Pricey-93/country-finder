@@ -3,7 +3,7 @@
 ## Table of Contents
 
 - [Overview](#overview)
-  - [Country Finder](#country-finder)
+  - [The App](#the-app)
   - [Links](#links)
 - [My Process](#my-process)
   - [Built With](#built-with)
@@ -11,7 +11,7 @@
 
 ## Overview
 
-### Country Finder
+### The App
 
 Users should be able to:
 
