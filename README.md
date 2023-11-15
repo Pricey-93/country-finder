@@ -18,10 +18,6 @@ Users can:
 - Click through to the border countries on the detail page
 - Toggle the color scheme between light and dark mode
 
-### Screenshot
-
-<img src="https://github.com/Pricey-93/country-finder/assets/56130851/08c2715f-2073-4723-8a4e-73d5cfcb5877"/>
-
 ### Links
 
 - [Solution](https://github.com/Pricey-93/country-finder)
