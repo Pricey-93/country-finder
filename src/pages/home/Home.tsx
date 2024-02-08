@@ -21,8 +21,8 @@ export default function Home() {
   }
 
   function searchCountries(userInput: string): void {
-    const searchResult = countries?.filter(country => country.name.common.toUpperCase().includes(userInput.toUpperCase()));
-    if (searchResult?.length > 0) {
+    const searchResult = countryManager.searchByName(userInput);
+    if (searchResult.length > 0) {
       setFilteredCountries(searchResult);
     }
   }
