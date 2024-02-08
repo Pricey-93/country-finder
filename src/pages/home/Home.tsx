@@ -8,7 +8,7 @@ export default function Home() {
   const { countryManager } = useContext();
   const countries = countryManager.getCountries();
 
-  const [filteredCountries, setFilteredCountries] = useState(countryManager.getCountries());
+  const [filteredCountries, setFilteredCountries] = useState(countries);
 
   function filterCountries(region: string): void {
     if (region === "Filter by Region") {
