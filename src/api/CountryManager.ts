@@ -13,7 +13,7 @@ export default class CountryManager {
     return country
   }
 
-  searchByName(userInput: string): ICountry[] | undefined {
+  searchByName(userInput: string): ICountry[] {
     const searchResult = this.countries.filter(country => country.name.common.toLowerCase().includes(userInput.toLowerCase()));
     return searchResult;
   }
