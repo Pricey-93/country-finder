@@ -36,7 +36,6 @@ export default function CountryDetails() {
   }, [activeCountry]);
 
   function borderClickHandler(country: ICountry) {
-    setActiveCountry(country);
     navigate(`/country-finder/countries/${country.name.common.toLowerCase()}`);
   }
 
