@@ -37,7 +37,7 @@ export interface Country {
 }
 export interface CountryDetailsRecord {
   country: Country,
-  borderCountries: Country[]  
+  borderCountries?: Country[]  
 }
 
 export interface CapitalInfo {
