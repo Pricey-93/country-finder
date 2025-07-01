@@ -1,5 +1,4 @@
 import { Link } from "react-router";
-import { Country } from "../../../api/types";
 
 interface Props {
   countryName: string,
