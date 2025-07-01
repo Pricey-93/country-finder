@@ -1,7 +1,7 @@
-interface IProps {
+interface Props {
   searchCountries: (name: string) => void 
 }
-export default function SearchInput(props: IProps) {
+export default function SearchInput(props: Props) {
   const { searchCountries } = props;
 
   return (

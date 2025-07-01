@@ -1,36 +1,32 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router";
 import "./index.css";
-
-//layouts
-import RootLayout, { loader as rootLoader } from './layouts/RootLayout';
-
-//pages
+import RootLayout from './layouts/RootLayout';
 import Home from './pages/home/Home';
 import CountryDetails from './pages/countryDetails/CountryDetails';
+import { countriesLoader, countryLoader } from './api/loaders';
 
 const router = createBrowserRouter([
   {
-    path: "/country-finder",
-    element: <RootLayout />,
-    // errorElement: <ErrorPage />,
-    loader: rootLoader,
+    path: "/country-finder/",
+    Component: RootLayout,
     children: [
       {
         index: true,
-        element: <Home />
+        Component: Home,
+        loader: countriesLoader
       },
       {
         path: "countries/:name", 
-        element: <CountryDetails /> 
+        Component: CountryDetails,
+        loader: countryLoader
       }
     ]
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <RouterProvider router={ router } />
-  </React.StrictMode>,
+const root = document.getElementById('root');
+
+ReactDOM.createRoot(root!).render(
+  <RouterProvider router={ router } />
 );

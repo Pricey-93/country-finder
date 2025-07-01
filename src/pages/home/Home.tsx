@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useContext } from "../../layouts/RootLayout";
 import SearchInput from "../../components/ui/searchInput/SearchInput";
 import RegionFilter from "../../components/ui/regionFilter/RegionFilter";
 import Card from "../../components/card/Card";
+import { useLoaderData } from "react-router";
+import { Country } from "../../api/types";
 
 export default function Home() {
-  const { countryManager } = useContext();
-  const countries = countryManager.getCountries();
+  const countries = useLoaderData<Country[]>();
 
   const [filteredCountries, setFilteredCountries] = useState(countries);
 
@@ -15,23 +15,22 @@ export default function Home() {
       setFilteredCountries(countries);
     }
     else {
-      const filtered = countries.filter(country => country.region === region);
-    setFilteredCountries(filtered);
+      setFilteredCountries(countries.filter(country => country.region === region));
     }
   }
 
-  function searchCountries(userInput: string): void {
-    const searchResult = countryManager.searchByName(userInput);
-    if (searchResult.length > 0) {
+  function searchCountries(query: string): void {
+    const searchResult = countries?.filter(country => country.name.common.toUpperCase().includes(query.toUpperCase()));
+    if (searchResult?.length > 0) {
       setFilteredCountries(searchResult);
     }
   }
 
-  return (
+  return ( 
     <main className="home-container">
       <div className="controls-wrapper">
-        <SearchInput searchCountries={ searchCountries }/>
-        <RegionFilter filterCountries={ filterCountries }/>
+        <SearchInput searchCountries={ searchCountries } />
+        <RegionFilter filterCountries={ filterCountries } />
       </div>
       <div className="cards-wrapper">
       {
