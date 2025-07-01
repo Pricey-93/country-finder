@@ -1,4 +1,4 @@
-import { fetchAllCountryOverviews } from "../src/api/requests";
+// import { fetchAllCountryOverviews } from "../src/api/requests";
 
 // const countries = await fetchAllCountryOverviews();
 
