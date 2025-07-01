@@ -7,20 +7,21 @@ export async function countriesLoader(): Promise<Country[]> {
   return result;
 }
 
-export async function countryLoader({ params }: LoaderFunctionArgs): Promise<CountryDetailsRecord> {
+export async function countryLoader({ params }: LoaderFunctionArgs): Promise<CountryDetailsRecord | undefined> {
   const { name } = params;
-  const details: CountryDetailsRecord = {};
 
   if (!name) throw new Error("Invalid parameters");
 
   const response = await fetchCountryByName(name);
   if (response) {
     const borderCodes = response[0].borders;
-    details.country = response[0];
     if (borderCodes) {
       const borderCountries = await fetchCountryNameByCca3(borderCodes);
-      details.borderCountries = borderCountries;
+      return { country: response[0], borderCountries: borderCountries };
+    }
+    else {
+      return {country: response[0]}
     }
   }
-  return details;
+  return undefined;
 }
