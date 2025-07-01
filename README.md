@@ -39,12 +39,10 @@ Users should be able to:
 ## My process
 
 ### Built with
-
-- Semantic HTML5 markup
-- CSS custom properties
-- Flexbox
 - Mobile-first workflow
 - [React](https://reactjs.org/)
+- [React-Router](https://reactrouter.com/)
+- [TypeScript](https://www.typescriptlang.org/)
 
 ## Author
 
