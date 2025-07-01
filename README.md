@@ -25,7 +25,7 @@ Users should be able to:
 - Filter countries by region
 - Click on a country to see more detailed information on a separate page
 - Click through to the border countries on the detail page
-- Toggle the color scheme between light and dark mode *(optional)*
+- Toggle the color scheme between light and dark mode
 
 ### Screenshot
 
@@ -45,16 +45,6 @@ Users should be able to:
 - Flexbox
 - Mobile-first workflow
 - [React](https://reactjs.org/)
-
-### What I learnt
-
-* I learnt how to add a toggleable dark theme to my projects. 
-* I also learnt that using flex-wrap instead of changing the layout at certain breakpoints
-can be a good way to naturally change the layout of a page as the width increases.
-
-### Continued development
-
-* I want to explore adding google maps functionality to each country. 
 
 ## Author
 
