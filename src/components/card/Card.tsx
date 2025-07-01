@@ -1,10 +1,10 @@
-import { ICountry } from "../../api/ICountry";
-import { useNavigate } from 'react-router-dom';
+import { Country } from "../../api/types";
+import { useNavigate } from 'react-router';
 
-interface IProps {
-  country: ICountry
+interface Props {
+  country: Country
 }
-export default function Card(props: IProps) {
+export default function Card(props: Props) {
   const { country } = props;
   const navigate = useNavigate();
 

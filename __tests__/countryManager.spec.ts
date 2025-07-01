@@ -1,5 +1,5 @@
-import CountryManager from "../src/api/CountryManager";
-import fetchAllCountries from "../src/api/countries";
+import CountryManager from "../src/api/countryHelpers";
+import fetchAllCountries from "../src/api/requests";
 
 const countries = await fetchAllCountries();
 const countryManager = new CountryManager(countries);

@@ -1,5 +1,5 @@
-import fetchAllCountries from '../src/api/countries';
-import { ICountry } from '../src/api/ICountry';
+import fetchAllCountries from '../src/api/requests';
+import { ICountry } from '../src/api/types';
 
   describe('Countries API', () => {
     it("should call the API", async () => {

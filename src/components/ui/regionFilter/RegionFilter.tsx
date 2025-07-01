@@ -1,7 +1,7 @@
-interface IProps {
+interface Props {
   filterCountries: (region: string) => void
 }
-export default function RegionFilter(props: IProps) {
+export default function RegionFilter(props: Props) {
   const { filterCountries } = props; 
 
   return (
